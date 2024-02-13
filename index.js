@@ -17,6 +17,8 @@ for (let element of emptyFieldMessage) {
 
 // Regular Expression Regex;
 let nameRegex = /^[a-z]+$/i;
+let emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+let pwdRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 formData.addEventListener("keyup", (e) => {
   e.preventDefault();
@@ -45,12 +47,48 @@ submitButton.addEventListener('click', (e) => {
   console.log(firstname, lastname, email, password);
   if (firstname) {
     if (!nameRegex.test(firstname)) {
-      console.log("Invalid name");
-    } else {
-      console.log("Good to go");
+      errorMessages[0].classList.remove('d-none');
     }
-  }else {
-    console.log("Please fill the first field");
+    else {
+      errorMessages[0].classList.add("d-none");
+    }
+  }
+  else {
+    emptyFieldMessage[0].classList.remove("d-none");
+  }
+
+  if (lastname) {
+    if (!nameRegex.test(lastname)) {
+      errorMessages[1].classList.remove('d-none');
+    }
+    else {
+      errorMessages[1].classList.add("d-none");
+    }
+  }
+  else {
+    emptyFieldMessage[1].classList.remove("d-none");
+  }
+
+  if (email) {
+    if (!emailRegex.test(email)) {
+      errorMessages[2].classList.remove('d-none');
+    } else {
+      errorMessages[2].classList.add("d-none");
+    }
+  }
+  else {
+    emptyFieldMessage[2].classList.remove("d-none");
+  }
+
+  if (password) {
+    if (!pwdRegex.test(password)) {
+      errorMessages[3].classList.remove('d-none');
+    } else {
+      errorMessages[3].classList.add("d-none");
+    }
+  }
+  else {
+    emptyFieldMessage[3].classList.remove("d-none");
   }
 })
 
