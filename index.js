@@ -4,6 +4,7 @@ let errorMessages = document.querySelectorAll(".error-message");
 let emptyFieldMessage = document.querySelectorAll(".empty-field");
 let showPasswordBtn = document.querySelector(".btn");
 
+let fnFlag, lnFlag, eFlag, pFlag;
 let firstname, lastname, email, password;
 let field;
 let fnTarget, lnTarget, eTarget, pTarget;
@@ -56,8 +57,10 @@ submitButton.addEventListener('click', (e) => {
     if (!nameRegex.test(firstname)) {
       fnTarget.classList.add("error");
       errorMessages[0].classList.remove('d-none');
+      fnFlag = false;
     }
     else {
+      fnFlag = true;
       errorMessages[0].classList.add("d-none");
     }
   }
@@ -70,8 +73,10 @@ submitButton.addEventListener('click', (e) => {
     if (!nameRegex.test(lastname)) {
       lnTarget.classList.add("error");
       errorMessages[1].classList.remove('d-none');
+      lnFlag = false;
     }
     else {
+      lnFlag = true;
       errorMessages[1].classList.add("d-none");
     }
   }
@@ -84,7 +89,9 @@ submitButton.addEventListener('click', (e) => {
     if (!emailRegex.test(email)) {
       eTarget.classList.add("error");
       errorMessages[2].classList.remove('d-none');
+      eFlag = false;
     } else {
+      eFlag = true;
       errorMessages[2].classList.add("d-none");
     }
   }
@@ -97,22 +104,31 @@ submitButton.addEventListener('click', (e) => {
     if (!pwdRegex.test(password)) {
       pTarget.classList.add("error");
       errorMessages[3].classList.remove('d-none');
+      pFlag = false;
     } else {
+      pFlag = true;
       errorMessages[3].classList.add("d-none");
     }
   }
   else {
     emptyFieldMessage[3].classList.remove("d-none");
   }
+
+
+  if (fnFlag && lnFlag && eFlag && pFlag) {
+    fnTarget.value = lnTarget.value = eTarget.value = pTarget.value = "";
+    window.location.href = "success.html";
+  }
+
 })
 
-showPasswordBtn.addEventListener('click',(e)=>{
+showPasswordBtn.addEventListener('click', (e) => {
   e.preventDefault();
   // console.log(e.target);
-  if(pTarget.getAttribute('type')==='text'){
-    pTarget.setAttribute('type','password');
-  }else{
-    pTarget.setAttribute('type','text');
+  if (pTarget.getAttribute('type') === 'text') {
+    pTarget.setAttribute('type', 'password');
+  } else {
+    pTarget.setAttribute('type', 'text');
   }
 
 })
